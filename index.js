@@ -2,7 +2,7 @@
 const app = express();
 
 app.get('/', (req, res) => {
-    res.send({ hi: 'there' });
+    res.send({ hi: 'there super ultra gay boy' });
 });
 
 //Next line is for heroku. We wait for heroku to specify what port we want to use. If we are
