@@ -4,6 +4,7 @@
 module.exports = {
     googleClientID: process.env.GOOGLE_CLIENT_ID,
     googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    mongoURI: process.env.MONGO_URI,
+    mongoURI: 'mongodb://codyprod:password@ds251889.mlab.com:51889/emaily-prod',
+    //mongoURI: process.env.MONGO_URI,
     cookieKey: process.env.COOKIE_KEY
 };

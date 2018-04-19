@@ -31,7 +31,7 @@ passport.use(
        
        clientID: keys.googleClientID,
        clientSecret: keys.googleClientSecret,
-       callbackURL: '/auth/google/callback' 
+       callbackURL: 'http://quickie-codebot1001.c9users.io/auth/google/callback' 
        //'http://quickie-codebot1001.c9users.io/auth/google/callback'
        //'https://agile-hollows-83355.herokuapp.com/''
        //
