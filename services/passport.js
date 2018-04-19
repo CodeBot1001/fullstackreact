@@ -28,6 +28,7 @@ passport.deserializeUser((id, done) => {
 passport.use(
   new GoogleStrategy(
    {
+       
        clientID: keys.googleClientID,
        clientSecret: keys.googleClientSecret,
        callbackURL: 'http://agile-hollows-83355.herokuapp.com/auth/google/callback' 
