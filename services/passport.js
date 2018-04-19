@@ -31,8 +31,7 @@ passport.use(
        
        clientID: keys.googleClientID,
        clientSecret: keys.googleClientSecret,
-       
-       callbackURL: '/auth/google/callback' 
+       callbackURL: keys.callbackURL
        //this short thing works with heroku, but not c9
        //need to add some code to check what environment we're in
        //'http://quickie-codebot1001.c9users.io/auth/google/callback'
