@@ -32,6 +32,7 @@ passport.use(
        clientID: keys.googleClientID,
        clientSecret: keys.googleClientSecret,
        callbackURL: '/auth/google/callback' 
+       //this might be working but only with heroku, not c9
        //'http://quickie-codebot1001.c9users.io/auth/google/callback'
        //'https://agile-hollows-83355.herokuapp.com/''
        //
