@@ -37,7 +37,8 @@ require("./routes/authRoutes")(app);
 //Next line is for heroku. We wait for heroku to specify what port we want to use. If we are
 //running in a development environment, like on our machines, we will say or (||) just use
 //Port 5000, or in my case 8080 because of c9 (i think)
-const PORT = 8081 || process.env.PORT;
+const PORT = process.env.PORT;
+//const PORT = 8081 || process.env.PORT;
 app.listen(PORT, function() {
   console.log("Server running...");
 });

@@ -12,6 +12,6 @@ module.exports = {
     //mongoURI: 'mongodb://cody:password@ds249269.mlab.com:49269/emaily-dev',
     //cookieKey: 'asdflakjsdfhlaskjdfhaslkfjhaslfkjh'
     clientSignIn: '/auth/google'
-     //this was from when i was gonna try to make something to find out what env we're in, and then
+    //this was from when i was gonna try to make something to find out what env we're in, and then
     //give the correct link to the sign in with google link on the front end front page
 };
