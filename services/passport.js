@@ -18,7 +18,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((id, done) => {
     User.findById(id).then(user => {
-            done(null, user);
+        done(null, user);
     });
 });
 
@@ -26,56 +26,38 @@ passport.deserializeUser((id, done) => {
 
 //creates a new instance of the google strategy, tells passport to use the strategy
 passport.use(
-  new GoogleStrategy(
-   {
-       
-       clientID: keys.googleClientID,
-       clientSecret: keys.googleClientSecret,
-       callbackURL: keys.callbackURL,
-       proxy: true
-       //this short thing works with heroku, but not c9
-       //need to add some code to check what environment we're in
-       //'http://quickie-codebot1001.c9users.io/auth/google/callback'
-       //'https://agile-hollows-83355.herokuapp.com/''
-       //
-       //may need to add in a thing that checks what env we're in and sends us to the correct link
-       //'/auth/google/callback'
-       
-   }, 
-   (accessToken, refreshToken, profile, done) => {
-      //Removing this stuff, because we dont care about posting this info to the console anymore
-      //console.log('access token', accessToken);
-      //console.log('refresh token', refreshToken);
-      //console.log('profile:', profile);
-      
-      //console.log('just profile:', profile);
-      //console.log('pofile with id:', profile.id);
-      //learned from above: profile is a ton of info. Profile.id just takes the id number
-      
-      //below is in lecture 37
-      User.findOne({ googleId: profile.id })
-        .then((existingUser) => {
+    new GoogleStrategy({
+
+            clientID: keys.googleClientID,
+            clientSecret: keys.googleClientSecret,
+            callbackURL: "/auth/google/callback",
+            //callbackURL: keys.callbackURL,
+            proxy: true
+            //this short thing works with heroku, but not c9
+            //need to add some code to check what environment we're in
+            //'http://quickie-codebot1001.c9users.io/auth/google/callback'
+            //'https://agile-hollows-83355.herokuapp.com/''
+            //
+            //may need to add in a thing that checks what env we're in and sends us to the correct link
+            //'/auth/google/callback'
+
+        },
+        async(accessToken, refreshToken, profile, done) => {
+            const existingUser = await User.findOne({ googleId: profile.id })
+
             if (existingUser) {
                 //we already have a record with the given profile id
                 //so we dont have to make a user
-                done(null, existingUser);
+                return done(null, existingUser);
                 //null says everything is good, existingUser means something didnt go right
-                //
-            } else {
-                //we need to make a new user
-                
-                 //this looks for an existing google id
-                 new User ({ googleId: profile.id })
-                    .save()
-                 //the .save saves this thing in the collection, so it makes a record
-                    .then(user => done(null, user));
-                 //saying done to user.findOne or an error
-                 //also, the user that we are calling back in the .then will be the newest
-                 //version, the freshest version of the user. It will incorporate any changes that
-                 //were made in the saving of the user
-                
             }
-        });
-    }       
-  )
+            //we need to make a new user
+
+            //this looks for an existing google id
+            const user = await new User({ googleId: profile.id }).save()
+            //the .save saves this thing in the collection, so it makes a record
+            done(null, user);
+
+        }
+    )
 );
